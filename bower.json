@@ -1,0 +1,33 @@
+{
+  "name": "nutrition-facts-expand",
+  "authors": [
+    "Ajay Thomas <ajaythomas123@gmail.com>"
+  ],
+  "description": "A nutrition facts polymer custom element that expands/collapses.",
+  "main": "nutrition-facts-expand.html",
+  "moduleType": [],
+  "keywords": [
+    "nutrition-facts",
+    "polymer",
+    "web-components",
+    "custom-elements",
+    "polymer-elements"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.2.3",
+    "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.6",
+    "iron-collapse": "PolymerElements/iron-collapse#~1.0.5"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~1.1.2"
+  }
+}
