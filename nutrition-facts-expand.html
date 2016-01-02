@@ -8,9 +8,12 @@
 
 <!--
 A nutrition facts card that can be expanded/collapsed.
+
 <b>Example - basic</b>
+
     <nutrition-facts-expand total-fat="4" trans-fat="2" cholestrol="30"
     sodium="660" total-carb="31" fiber="10" sugars="5" protein="5"></nutrition-facts-expand>
+
 @demo
 -->
 
@@ -50,7 +53,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="bold-text col-80">Total Fat <span>{{totalFat}}</span>g</p>
-                  <p class="bold-text col-20 text-right"><span>{{totalFatPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_totalFatPercentage}}</span>%</p>
                 </div>
               </div>
             </div>
@@ -59,7 +62,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="normal-text col-80">Saturated Fat <span>{{satFat}}</span>g</p>
-                  <p class="bold-text col-20 text-right"><span>{{satFatPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_satFatPercentage}}</span>%</p>
                 </div>
               </div>
               <hr>
@@ -75,7 +78,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="bold-text col-80">Cholestrol <span>{{cholestrol}}</span>mg</p>
-                  <p class="bold-text col-20 text-right"><span>{{cholestrolPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_cholestrolPercentage}}</span>%</p>
                 </div>
               </div>
             </div>
@@ -84,7 +87,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="bold-text col-80">Sodium <span>{{sodium}}</span>mg</p>
-                  <p class="bold-text col-20 text-right"><span>{{sodiumPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_sodiumPercentage}}</span>%</p>
                 </div>
               </div>
             </div>
@@ -93,7 +96,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="bold-text col-80">Total Carbohydrate <span>{{totalCarb}}</span>g</p>
-                  <p class="bold-text col-20 text-right"><span>{{totalCarbPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_totalCarbPercentage}}</span>%</p>
                 </div>
               </div>
             </div>
@@ -102,7 +105,7 @@ A nutrition facts card that can be expanded/collapsed.
               <div class="nutrition-facts-subtitle">
                 <div class="subtitle-text-block">
                   <p class="normal-text col-80">Dietary Fiber <span>{{fiber}}</span>g</p>
-                  <p class="bold-text col-20 text-right"><span>{{fiberPercentage}}</span>%</p>
+                  <p class="bold-text col-20 text-right"><span>{{_fiberPercentage}}</span>%</p>
                 </div>
               </div>
               <hr>
