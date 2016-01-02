@@ -8,12 +8,9 @@
 
 <!--
 A nutrition facts card that can be expanded/collapsed.
-
 <b>Example - basic</b>
-
     <nutrition-facts-expand total-fat="4" trans-fat="2" cholestrol="30"
     sodium="660" total-carb="31" fiber="10" sugars="5" protein="5"></nutrition-facts-expand>
-
 @demo
 -->
 
@@ -29,7 +26,7 @@ A nutrition facts card that can be expanded/collapsed.
         <section class="nutrition-facts-serving-block">
           <div class="nutrition-facts-subtitle">
             <p class="normal-text">Serving Size: <span>{{servingSize}}</span></p>
-            <p class="normal-text">Serves: <span>{{serves}}</span></p>
+            <p class="normal-text">Servings: <span>{{servings}}</span></p>
           </div>
           <hr class="fat-rule">
         </section>
@@ -156,97 +153,168 @@ A nutrition facts card that can be expanded/collapsed.
 <script>
   Polymer({
     is: "nutrition-facts-expand",
-
     properties: {
+
+      /**
+       * Serving size.
+       */
       servingSize: String,
-      serves: String,
+
+      /**
+       * Number of servings.
+       */
+      servings: String,
+
+      /**
+       * Number of calories in a single serving.
+       */
       calories: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Number of calories from fat in a single serving.
+       */
       fatCal: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Total amount of fat in a single serving.
+       */
       totalFat: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of suturated fat in a single serving.
+       */
       satFat: {
         type: Number,
         value: 0,
         reflectToAttribute: true
       },
+
+      /**
+       * Amount of trans fat in a single serving.
+       */
       transFat: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of cholestrol in a single serving.
+       */
       cholestrol: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of sodium in a single serving.
+       */
       sodium: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Total amount of carbohydrates in a single serving.
+       */
       totalCarb: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of dietary fiber in a single serving.
+       */
       fiber: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of sugar in a single serving.
+       */
       sugars: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Amount of protein in a single serving.
+       */
       protein: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Percentage daily value of vitamin A.
+       */
       vitA: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Percentage daily value of vitamin C.
+       */
       vitC: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Percentage daily value of calcium.
+       */
       calcium: {
         type: Number,
         value: 0
       },
+
+      /**
+       * Percentage daily value of iron.
+       */
       iron: {
         type: Number,
         value: 0
       },
+
+      /**
+       * If *true*, the nutrition facts card is expanded.
+       */
       opened: {
         type: Boolean,
         value: false,
         reflectToAttribute: true
       },
-      totalFatPercentage: {
+      _totalFatPercentage: {
         type: Number,
         computed: '_percentage(totalFat, 70)'
       },
-      satFatPercentage: {
+      _satFatPercentage: {
         type: Number,
         computed: '_percentage(satFat, 20)'
       },
-      cholestrolPercentage: {
+      _cholestrolPercentage: {
         type: Number,
         computed: '_percentage(cholestrol, 300)'
       },
-      sodiumPercentage: {
+      _sodiumPercentage: {
         type: Number,
         computed: '_percentage(sodium, 2300)'
       },
-      totalCarbPercentage: {
+      _totalCarbPercentage: {
         type: Number,
         computed: '_percentage(totalCarb, 310)'
       },
-      fiberPercentage: {
+      _fiberPercentage: {
         type: Number,
         computed: '_percentage(fiber, 25)'
       }
@@ -259,7 +327,6 @@ A nutrition facts card that can be expanded/collapsed.
       moreInfo.toggle();
     },
     _percentage: function(value, recommendedValue) {
-      console.log(value);
       return Math.round((value / recommendedValue) * 100);
     }
   });
