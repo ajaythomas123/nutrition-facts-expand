@@ -38,7 +38,7 @@ A nutrition facts card that can be expanded/collapsed.
             <p class="bold-text">Calories <span>{{calories}}</span></p>
             <p class="normal-text indent">Fat Cal. <span>{{fatCal}}</span></p>
           </div>
-          <paper-icon-button on-tap="_expandMoreInfo" icon="hardware:keyboard-arrow-down"></paper-icon-button>
+          <paper-icon-button on-tap="_expandMoreInfo" icon="{{buttonIcon}}"></paper-icon-button>
         </section>
       </section>
       <iron-collapse opened="{{opened}}" id="moreInfo">
@@ -297,6 +297,12 @@ A nutrition facts card that can be expanded/collapsed.
         value: false,
         reflectToAttribute: true
       },
+
+      buttonIcon: {
+        type: String,
+        computed: '_setButtonIcon(opened)'
+      },
+
       _totalFatPercentage: {
         type: Number,
         computed: '_percentage(totalFat, 70)'
@@ -324,13 +330,15 @@ A nutrition facts card that can be expanded/collapsed.
     },
     _expandMoreInfo: function(event) {
       var moreInfo = this.$.moreInfo;
-      var iconButton = Polymer.dom(event).localTarget;
-      iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-down'
-                                        : 'hardware:keyboard-arrow-up';
       moreInfo.toggle();
     },
     _percentage: function(value, recommendedValue) {
       return Math.round((value / recommendedValue) * 100);
+    },
+    _setButtonIcon: function(opened) {
+      var icon = opened ? 'hardware:keyboard-arrow-up'
+                        : 'hardware:keyboard-arrow-down';
+      return icon;
     }
   });
 </script>
