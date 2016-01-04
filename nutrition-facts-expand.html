@@ -9,10 +9,9 @@
 <!--
 A nutrition facts card that can be expanded/collapsed.
 
-<b>Example - basic</b>
+<b>Example:</b>
 
-    <nutrition-facts-expand total-fat="4" trans-fat="2" cholestrol="30"
-    sodium="660" total-carb="31" fiber="10" sugars="5" protein="5"></nutrition-facts-expand>
+    <nutrition-facts-expand serving-size="2 slices (13g)" servings="10" calories="70" fat-cal="60" total-fat="6" sat-fat="2.5" cholestrol="10" sodium="210" protein="4"></nutrition-facts-expand>
 
 @demo
 -->
@@ -20,7 +19,11 @@ A nutrition facts card that can be expanded/collapsed.
 <dom-module id="nutrition-facts-expand">
   <template>
     <style include="nutrition-vertical-style"></style>
-    <style>:host { display: inline; }</style>
+    <style>
+      :host {
+        display: inline;
+      }
+    </style>
     <section class="nutrition-facts">
       <header class="nutrition-title-block bold-text">
         <h1>Nutrition Facts</h1>
@@ -29,7 +32,7 @@ A nutrition facts card that can be expanded/collapsed.
         <section class="nutrition-facts-serving-block">
           <div class="nutrition-facts-subtitle">
             <p class="normal-text">Serving Size: <span>{{servingSize}}</span></p>
-            <p class="normal-text">Servings: <span>{{servings}}</span></p>
+            <p class="normal-text">Servings Per Container: <span>{{servings}}</span></p>
           </div>
           <hr class="fat-rule">
         </section>
@@ -38,7 +41,7 @@ A nutrition facts card that can be expanded/collapsed.
             <p class="bold-text">Calories <span>{{calories}}</span></p>
             <p class="normal-text indent">Fat Cal. <span>{{fatCal}}</span></p>
           </div>
-          <paper-icon-button on-tap="_expandMoreInfo" icon="{{buttonIcon}}"></paper-icon-button>
+          <paper-icon-button on-tap="_expandMoreInfo" icon="{{_buttonIcon}}"></paper-icon-button>
         </section>
       </section>
       <iron-collapse opened="{{opened}}" id="moreInfo">
@@ -164,7 +167,7 @@ A nutrition facts card that can be expanded/collapsed.
       servingSize: String,
 
       /**
-       * Number of servings.
+       * Number of servings per container.
        */
       servings: String,
 
@@ -185,7 +188,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Total amount of fat in a single serving.
+       * Total amount of fat (in grams) in a single serving.
        */
       totalFat: {
         type: Number,
@@ -193,7 +196,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of suturated fat in a single serving.
+       * Amount of suturated fat (in grams) in a single serving.
        */
       satFat: {
         type: Number,
@@ -202,7 +205,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of trans fat in a single serving.
+       * Amount of trans fat (in grams) in a single serving.
        */
       transFat: {
         type: Number,
@@ -210,7 +213,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of cholestrol in a single serving.
+       * Amount of cholestrol (in milligrams) in a single serving.
        */
       cholestrol: {
         type: Number,
@@ -218,7 +221,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of sodium in a single serving.
+       * Amount of sodium (in milligrams) in a single serving.
        */
       sodium: {
         type: Number,
@@ -226,7 +229,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Total amount of carbohydrates in a single serving.
+       * Total amount of carbohydrates (in grams) in a single serving.
        */
       totalCarb: {
         type: Number,
@@ -234,7 +237,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of dietary fiber in a single serving.
+       * Amount of dietary fiber (in grams) in a single serving.
        */
       fiber: {
         type: Number,
@@ -242,7 +245,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of sugar in a single serving.
+       * Amount of sugar (in grams) in a single serving.
        */
       sugars: {
         type: Number,
@@ -250,7 +253,7 @@ A nutrition facts card that can be expanded/collapsed.
       },
 
       /**
-       * Amount of protein in a single serving.
+       * Amount of protein (in grams) in a single serving.
        */
       protein: {
         type: Number,
@@ -298,43 +301,92 @@ A nutrition facts card that can be expanded/collapsed.
         reflectToAttribute: true
       },
 
-      buttonIcon: {
+      /**
+       * The name of the button icon.
+       */
+      _buttonIcon: {
         type: String,
         computed: '_setButtonIcon(opened)'
       },
 
+      /**
+       * Percentage daily value of total fat.
+       */
       _totalFatPercentage: {
         type: Number,
         computed: '_percentage(totalFat, 70)'
       },
+
+      /**
+       * Percentage daily value of saturated fat.
+       */
       _satFatPercentage: {
         type: Number,
-        computed: '_percentage(satFat, 20)'
+        computed: '_percentage(satFat, 24)'
       },
+
+      /**
+       * Percentage daily value of cholestrol.
+       */
       _cholestrolPercentage: {
         type: Number,
         computed: '_percentage(cholestrol, 300)'
       },
+
+      /**
+       * Percentage daily value of sodium.
+       */
       _sodiumPercentage: {
         type: Number,
         computed: '_percentage(sodium, 2300)'
       },
+
+      /**
+       * Percentage daily value of total carbohydrates.
+       */
       _totalCarbPercentage: {
         type: Number,
         computed: '_percentage(totalCarb, 310)'
       },
+
+      /**
+       * Percentage daily value of dietary fiber.
+       */
       _fiberPercentage: {
         type: Number,
         computed: '_percentage(fiber, 25)'
       }
     },
+
+    /**
+     * Clicking the button expands/collapses the nutrition facts card.
+     *
+     * @param {MouseEvent|TouchEvent} event A valid mouse or touch event.
+     */
     _expandMoreInfo: function(event) {
       var moreInfo = this.$.moreInfo;
       moreInfo.toggle();
     },
+
+    /**
+     * Calculates the percentage daily value of a nutrient.
+     * 
+     * @param {Number} value The amount of the nutrient.
+     * @param {Number} recommendedValue The recommended intake amount of the
+           nutrient.
+     * @return {String} The percentage daily value of the nutrient.
+     */
     _percentage: function(value, recommendedValue) {
       return Math.round((value / recommendedValue) * 100);
     },
+
+    /**
+     * Changes the icon on the expand/collapse button.
+     *
+     * @param {Boolean} opened The property indicating whether the nutrition
+     *     facts card is expanded or collapsed.
+     * @return {String} The name of the button icon.
+     */
     _setButtonIcon: function(opened) {
       var icon = opened ? 'hardware:keyboard-arrow-up'
                         : 'hardware:keyboard-arrow-down';
