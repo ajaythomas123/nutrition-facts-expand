@@ -15,7 +15,7 @@
     "polymer-elements"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/ajaythomas123/nutrition-facts-expand",
   "ignore": [
     "**/.*",
     "node_modules",
