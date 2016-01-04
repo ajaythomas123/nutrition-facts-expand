@@ -1,0 +1,43 @@
+{
+  "name": "nutrition-facts-expand",
+  "authors": [
+    "Ajay Thomas <ajaythomas123@gmail.com>"
+  ],
+  "description": "A nutrition facts polymer custom element that expands/collapses.",
+  "main": "nutrition-facts-expand.html",
+  "moduleType": [],
+  "keywords": [
+    "nutrition-facts",
+    "polymer",
+    "web-components",
+    "custom-elements",
+    "polymer-elements"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ajaythomas123/nutrition-facts-expand",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.2.3",
+    "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.6",
+    "iron-collapse": "PolymerElements/iron-collapse#~1.0.5"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~1.1.2"
+  },
+  "_release": "2be37b2b5b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "2be37b2b5b6e64077a138346fe19a3dcf637ca3d"
+  },
+  "_source": "git://github.com/ajaythomas123/nutrition-facts-expand.git",
+  "_target": "master",
+  "_originalSource": "ajaythomas123/nutrition-facts-expand",
+  "_direct": true
+}

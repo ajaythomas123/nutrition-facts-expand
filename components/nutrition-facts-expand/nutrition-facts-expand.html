@@ -1,0 +1,396 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import"  href="../paper-icon-button/paper-icon-button.html">
+<link rel="import"  href="../iron-icons/hardware-icons.html">
+<link rel="import" href="nutrition-vertical-style.html">
+
+<!-- TODO: Add custom styling. -->
+
+<!--
+A nutrition facts card that can be expanded/collapsed.
+
+<b>Example:</b>
+
+    <nutrition-facts-expand serving-size="2 slices (13g)" servings="10" calories="70" fat-cal="60" total-fat="6" sat-fat="2.5" cholestrol="10" sodium="210" protein="4"></nutrition-facts-expand>
+
+@demo
+-->
+
+<dom-module id="nutrition-facts-expand">
+  <template>
+    <style include="nutrition-vertical-style"></style>
+    <style>
+      :host {
+        display: inline;
+      }
+    </style>
+    <section class="nutrition-facts">
+      <header class="nutrition-title-block bold-text">
+        <h1>Nutrition Facts</h1>
+      </header>
+      <section class="nutrition-summary-block">
+        <section class="nutrition-facts-serving-block">
+          <div class="nutrition-facts-subtitle">
+            <p class="normal-text">Serving Size: <span>{{servingSize}}</span></p>
+            <p class="normal-text">Servings Per Container: <span>{{servings}}</span></p>
+          </div>
+          <hr class="fat-rule">
+        </section>
+        <section class="nutrition-facts-calories-block">
+          <div class="nutrition-facts-subtitle">
+            <p class="bold-text">Calories <span>{{calories}}</span></p>
+            <p class="normal-text indent">Fat Cal. <span>{{fatCal}}</span></p>
+          </div>
+          <paper-icon-button on-tap="_expandMoreInfo" icon="{{_buttonIcon}}"></paper-icon-button>
+        </section>
+      </section>
+      <iron-collapse opened="{{opened}}" id="moreInfo">
+        <section class="nutrition-detailed-block">
+          <section class="nutrition-detail-info">
+            <hr class="med-rule">
+            <div class="nutrition-facts-subtitle">
+              <p class="bold-text text-right">% Daily Value*</p>
+            </div>
+            <div class="nutrition-facts-subtitle-block">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="bold-text col-80">Total Fat <span>{{totalFat}}</span>g</p>
+                  <p class="bold-text col-20 text-right"><span>{{_totalFatPercentage}}</span>%</p>
+                </div>
+              </div>
+            </div>
+            <div class="nutrition-facts-subtitle-block indent">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-80">Saturated Fat <span>{{satFat}}</span>g</p>
+                  <p class="bold-text col-20 text-right"><span>{{_satFatPercentage}}</span>%</p>
+                </div>
+              </div>
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-80">Trans Fat <span>{{transFat}}</span>g</p>
+                  <p class="bold-text col-20 text-right"></p>
+                </div>
+              </div>  
+            </div>
+            <div class="nutrition-facts-subtitle-block">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="bold-text col-80">Cholestrol <span>{{cholestrol}}</span>mg</p>
+                  <p class="bold-text col-20 text-right"><span>{{_cholestrolPercentage}}</span>%</p>
+                </div>
+              </div>
+            </div>
+            <div class="nutrition-facts-subtitle-block">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="bold-text col-80">Sodium <span>{{sodium}}</span>mg</p>
+                  <p class="bold-text col-20 text-right"><span>{{_sodiumPercentage}}</span>%</p>
+                </div>
+              </div>
+            </div>
+            <div class="nutrition-facts-subtitle-block">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="bold-text col-80">Total Carbohydrate <span>{{totalCarb}}</span>g</p>
+                  <p class="bold-text col-20 text-right"><span>{{_totalCarbPercentage}}</span>%</p>
+                </div>
+              </div>
+            </div>
+            <div class="nutrition-facts-subtitle-block indent">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-80">Dietary Fiber <span>{{fiber}}</span>g</p>
+                  <p class="bold-text col-20 text-right"><span>{{_fiberPercentage}}</span>%</p>
+                </div>
+              </div>
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-80">Sugars <span>{{sugars}}</span>g</p>
+                  <p class="bold-text col-20 text-right"></p>
+                </div>
+              </div>
+            </div>
+            <div class="nutrition-facts-subtitle-block">
+              <hr>
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="bold-text col-80">Protein <span>{{protein}}</span>g</p>
+                  <p class="bold-text col-20 text-right"></p>
+                </div>
+              </div>
+            </div>
+            <hr class="fat-rule no-top-rule">
+            <div class="nutrition-facts-subtitle-block">
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-50">Vitamin A <span>{{vitA}}</span>%</p>
+                  <p class="normal-text col-50">Vitamin C <span>{{vitC}}</span>%</p>
+                </div>
+              </div>
+              <hr class="no-top-rule">
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text col-50">Calcium <span>{{calcium}}</span>%</p>
+                  <p class="normal-text col-50">Iron <span>{{iron}}</span>%</p>
+                </div>
+              </div>
+              <hr class="no-top-rule">
+              <div class="nutrition-facts-subtitle">
+                <div class="subtitle-text-block">
+                  <p class="normal-text">*Percentage Daily Values are based on a 2,000 calorie diet.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </iron-collapse>
+    </section>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "nutrition-facts-expand",
+    properties: {
+
+      /**
+       * Serving size.
+       */
+      servingSize: String,
+
+      /**
+       * Number of servings per container.
+       */
+      servings: String,
+
+      /**
+       * Number of calories in a single serving.
+       */
+      calories: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Number of calories from fat in a single serving.
+       */
+      fatCal: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Total amount of fat (in grams) in a single serving.
+       */
+      totalFat: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of suturated fat (in grams) in a single serving.
+       */
+      satFat: {
+        type: Number,
+        value: 0,
+        reflectToAttribute: true
+      },
+
+      /**
+       * Amount of trans fat (in grams) in a single serving.
+       */
+      transFat: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of cholestrol (in milligrams) in a single serving.
+       */
+      cholestrol: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of sodium (in milligrams) in a single serving.
+       */
+      sodium: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Total amount of carbohydrates (in grams) in a single serving.
+       */
+      totalCarb: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of dietary fiber (in grams) in a single serving.
+       */
+      fiber: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of sugar (in grams) in a single serving.
+       */
+      sugars: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Amount of protein (in grams) in a single serving.
+       */
+      protein: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Percentage daily value of vitamin A.
+       */
+      vitA: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Percentage daily value of vitamin C.
+       */
+      vitC: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Percentage daily value of calcium.
+       */
+      calcium: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * Percentage daily value of iron.
+       */
+      iron: {
+        type: Number,
+        value: 0
+      },
+
+      /**
+       * If *true*, the nutrition facts card is expanded.
+       */
+      opened: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+
+      /**
+       * The name of the button icon.
+       */
+      _buttonIcon: {
+        type: String,
+        computed: '_setButtonIcon(opened)'
+      },
+
+      /**
+       * Percentage daily value of total fat.
+       */
+      _totalFatPercentage: {
+        type: Number,
+        computed: '_percentage(totalFat, 70)'
+      },
+
+      /**
+       * Percentage daily value of saturated fat.
+       */
+      _satFatPercentage: {
+        type: Number,
+        computed: '_percentage(satFat, 24)'
+      },
+
+      /**
+       * Percentage daily value of cholestrol.
+       */
+      _cholestrolPercentage: {
+        type: Number,
+        computed: '_percentage(cholestrol, 300)'
+      },
+
+      /**
+       * Percentage daily value of sodium.
+       */
+      _sodiumPercentage: {
+        type: Number,
+        computed: '_percentage(sodium, 2300)'
+      },
+
+      /**
+       * Percentage daily value of total carbohydrates.
+       */
+      _totalCarbPercentage: {
+        type: Number,
+        computed: '_percentage(totalCarb, 310)'
+      },
+
+      /**
+       * Percentage daily value of dietary fiber.
+       */
+      _fiberPercentage: {
+        type: Number,
+        computed: '_percentage(fiber, 25)'
+      }
+    },
+
+    /**
+     * Clicking the button expands/collapses the nutrition facts card.
+     *
+     * @param {MouseEvent|TouchEvent} event A valid mouse or touch event.
+     */
+    _expandMoreInfo: function(event) {
+      var moreInfo = this.$.moreInfo;
+      moreInfo.toggle();
+    },
+
+    /**
+     * Calculates the percentage daily value of a nutrient.
+     * 
+     * @param {Number} value The amount of the nutrient.
+     * @param {Number} recommendedValue The recommended intake amount of the
+           nutrient.
+     * @return {String} The percentage daily value of the nutrient.
+     */
+    _percentage: function(value, recommendedValue) {
+      return Math.round((value / recommendedValue) * 100);
+    },
+
+    /**
+     * Changes the icon on the expand/collapse button.
+     *
+     * @param {Boolean} opened The property indicating whether the nutrition
+     *     facts card is expanded or collapsed.
+     * @return {String} The name of the button icon.
+     */
+    _setButtonIcon: function(opened) {
+      var icon = opened ? 'hardware:keyboard-arrow-up'
+                        : 'hardware:keyboard-arrow-down';
+      return icon;
+    }
+  });
+</script>
